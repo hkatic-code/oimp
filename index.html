@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OI MP</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1f6b55">
+<meta name="apple-mobile-web-app-title" content="OI MP">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f3f5f4;color:#14201c;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center}
+  main{padding:24px;max-width:420px}
+  img{width:120px;height:120px;border-radius:24px}
+  h1{font-size:22px;margin:16px 0 6px}
+  p{color:#5b6b66;margin:0 0 20px}
+  a.btn{display:inline-block;background:#1f6b55;color:#fff;text-decoration:none;font-weight:600;padding:12px 22px;border-radius:10px}
+  .hint{font-size:13px;margin-top:22px}
+</style>
+</head>
+<body>
+<main>
+  <img src="icon-512.png" alt="Logo Odreda izviđača „MP”">
+  <h1>Odred izviđača „MP”</h1>
+  <p id="msg">Otvaram aplikaciju…</p>
+  <a class="btn" id="go" href="https://claude.ai/artifact/Fu5yhkFy3ttuvfmMYffYz6">Otvori aplikaciju</a>
+  <p class="hint" id="hint" hidden>Za ikonu na početnom zaslonu: u Chromeu ⋮ → <b>Dodaj na početni zaslon</b> (ili <b>Instaliraj aplikaciju</b>).<br>Na iPhoneu u Safariju: Dijeli → <b>Dodaj na početni zaslon</b>.</p>
+</main>
+<script>
+  const APP = "https://claude.ai/artifact/Fu5yhkFy3ttuvfmMYffYz6";
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+  const installed = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  if (installed) {
+    // pokrenuto s ikone na početnom zaslonu -> odmah u aplikaciju
+    location.replace(APP);
+  } else {
+    // otvoreno u pregledniku -> pokaži upute za instalaciju
+    document.getElementById("msg").textContent = "Aplikacija za članarine, uplate, članove i potvrde.";
+    document.getElementById("hint").hidden = false;
+  }
+</script>
+</body>
+</html>
